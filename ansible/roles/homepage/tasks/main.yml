@@ -1,0 +1,35 @@
+- name: install packages
+  apt:
+    name:
+      - git
+      - nginx
+
+- name: configure nginx
+  template:
+    src: nginx.j2
+    dest: /etc/nginx/sites-enabled/vavilova15
+
+- name: check if project root exists
+  stat:
+    path: "{{ www.root }}"
+  register: stat_result
+
+- name: clone project if not exists
+  when: not stat_result.stat.exists
+  git:
+    repo: https://github.com/micdm/vavilova15.git
+    dest: /tmp/git_clone
+  copy:
+    src: /tmp/git_clone/www
+    dest: "{{ www.root }}"
+
+- name: set group address
+  template:
+    src: .group_address.j2
+    dest: "{{ www.root }}/.group_address"
+
+- name: start and enable nginx
+  service:
+    name: nginx
+    state: restarted
+    enabled: yes
