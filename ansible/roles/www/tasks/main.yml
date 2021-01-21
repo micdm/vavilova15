@@ -9,28 +9,10 @@
     src: nginx.j2
     dest: /etc/nginx/sites-enabled/default
 
-- name: check if project root exists
-  stat:
-    path: "{{ www.root }}"
-  register: stat_result
-
-- name: clone project if not exists
-  when: not stat_result.stat.exists
+- name: clone project
   git:
     repo: https://github.com/micdm/vavilova15.git
-    dest: /tmp/git_clone
-
-- name: copy www directory
-  when: not stat_result.stat.exists
-  copy:
-    src: /tmp/git_clone/www/
-    dest: "{{ www.root }}"
-    remote_src: yes
-
-- name: set group address
-  template:
-    src: .group_address.j2
-    dest: "{{ www.root }}/.group_address"
+    dest: "{{ www.project_root }}"
 
 - name: start and enable nginx
   service:
