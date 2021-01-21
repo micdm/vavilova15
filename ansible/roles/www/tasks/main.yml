@@ -7,7 +7,7 @@
 - name: configure nginx
   template:
     src: nginx.j2
-    dest: /etc/nginx/sites-enabled/vavilova15
+    dest: /etc/nginx/sites-enabled/default
 
 - name: check if project root exists
   stat:
@@ -19,9 +19,13 @@
   git:
     repo: https://github.com/micdm/vavilova15.git
     dest: /tmp/git_clone
+
+- name: copy www directory
+  when: not stat_result.stat.exists
   copy:
-    src: /tmp/git_clone/www
+    src: /tmp/git_clone/www/
     dest: "{{ www.root }}"
+    remote_src: yes
 
 - name: set group address
   template:

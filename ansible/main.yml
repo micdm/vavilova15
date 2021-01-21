@@ -4,7 +4,7 @@
     - role: certbot
       tags:
         - www
-    - role: webserver
+    - role: www
       tags:
         - www
   vars_prompt:

@@ -1,0 +1,28 @@
+server {
+    listen 80 default_server;
+
+    location / {
+        return 301 https://$host$request_uri;
+    }
+
+    location /.well-known/acme-challenge {
+        root /var/www/acme;
+    }
+}
+
+server {
+    server_name {{ www.domain }};
+    listen 443 ssl;
+
+    ssl_certificate {{ www.cert_root }}/fullchain.pem;
+    ssl_certificate_key {{ www.cert_root }}/privkey.pem;
+    ssl_trusted_certificate {{ www.cert_root }}/chain.pem;
+
+    root {{ www.root }};
+    index index.html;
+    ssi on;
+
+    location ~ /\. {
+        deny all;
+    }
+}

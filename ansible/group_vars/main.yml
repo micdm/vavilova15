@@ -1,2 +1,6 @@
 www:
+  domain: vavilova15.tom.ru
   root: /var/www/vavilova15
+  cert_root: /etc/letsencrypt/live/vavilova15.tom.ru
+misc:
+  email: mic@demerzov.ru
