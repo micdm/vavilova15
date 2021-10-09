@@ -7,7 +7,3 @@
     - role: www
       tags:
         - www
-  vars_prompt:
-    - name: group_address
-      prompt: Invitation address for WhatsApp
-      private: no

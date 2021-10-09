@@ -7,7 +7,7 @@
 - name: configure nginx
   template:
     src: nginx.j2
-    dest: /etc/nginx/sites-enabled/default
+    dest: /etc/nginx/sites-enabled/vavilova15.conf
 
 - name: clone project
   git:
