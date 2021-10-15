@@ -13,6 +13,7 @@
   git:
     repo: https://github.com/micdm/vavilova15.git
     dest: "{{ www.project_root }}"
+    force: yes
 
 - name: start and enable nginx
   service:
