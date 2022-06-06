@@ -1,2 +1,2 @@
 [Service]
-ExecStart=/usr/bin/certbot renew -q --webroot -w /var/www/acme --post-hook "service nginx reload"
+ExecStart=bash -c "/usr/bin/certbot renew -q --webroot -w /var/www/acme && systemctl reload nginx"

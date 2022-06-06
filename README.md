@@ -1,3 +1,3 @@
 ```shell
-ansible-playbook -bi hosts.yml main.yml
+ansible-playbook -i hosts.yml main.yml
 ```
